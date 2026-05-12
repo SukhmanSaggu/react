@@ -3,10 +3,13 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from '../components/Navbar';
 
-const MainLayout = () => {
+const MainLayout = ({ isAdminSignedIn, adminLogout }) => {
     return (
         <>
-            <Navbar />
+            <Navbar
+                isAdminSignedIn={isAdminSignedIn}
+                adminLogout={adminLogout}
+            />
             <Outlet />
             <ToastContainer />
         </>

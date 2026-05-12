@@ -1,18 +1,31 @@
 import { useState, useEffect } from 'react';
 import JobListing from './JobListing.jsx';
 import Spinner from './Spinner.jsx';
-// 1. Import the file directly
-import jobsData from '../jobs.json';
 
 const JobsListing = ({ isHome = false }) => {
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
     useEffect(() => {
-        // 2. Simply set the data from the imported file
-        const data = isHome ? jobsData.slice(0, 3) : jobsData;
-        setJobs(data);
-        setLoading(false);
+        const fetchJobs = async () => {
+            try {
+                const res = await fetch('/api/jobs');
+                if (!res.ok) {
+                    throw new Error(`API request failed with status ${res.status}`);
+                }
+                const data = await res.json();
+                const jobsData = isHome ? data.slice(0, 3) : data;
+                setJobs(jobsData);
+            } catch (error) {
+                console.error('Error fetching jobs:', error);
+                setError('Jobs could not be loaded from MySQL. Please check that the API server is running on port 8000.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchJobs();
     }, [isHome]);
 
     return (
@@ -24,6 +37,8 @@ const JobsListing = ({ isHome = false }) => {
 
                 {loading ? (
                     <Spinner loading={loading} />
+                ) : error ? (
+                    <p className='text-center text-red-600'>{error}</p>
                 ) : (
                     <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
                         {jobs.map((job) => (

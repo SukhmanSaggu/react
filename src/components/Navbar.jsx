@@ -1,11 +1,20 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import logo from '../assets/images/logo.png';
 
-const Navbar = () => {
+const Navbar = ({ isAdminSignedIn, adminLogout }) => {
+    const navigate = useNavigate();
+
     const linkClass = ({ isActive }) =>
         isActive
             ? 'bg-black text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'
             : 'text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2';
+
+    const handleAdminLogout = () => {
+        adminLogout();
+        toast.success('Admin signed out');
+        navigate('/');
+    };
 
     return (
         <nav className='bg-indigo-700 border-b border-indigo-500'>
@@ -20,15 +29,35 @@ const Navbar = () => {
                         </NavLink>
                         <div className='md:ml-auto'>
                             <div className='flex space-x-2'>
-                                <NavLink to='/' className={linkClass}>
-                                    Home
-                                </NavLink>
-                                <NavLink to='/jobs' className={linkClass}>
-                                    Jobs
-                                </NavLink>
-                                <NavLink to='/add-job' className={linkClass}>
-                                    Add Job
-                                </NavLink>
+                                {isAdminSignedIn ? (
+                                    <>
+                                        <NavLink to='/add-job' className={linkClass}>
+                                            Add Job
+                                        </NavLink>
+                                        <NavLink to='/manage-jobs' className={linkClass}>
+                                            Manage Jobs
+                                        </NavLink>
+                                        <NavLink to='/change-password' className={linkClass}>
+                                            Change Password
+                                        </NavLink>
+                                        <button
+                                            type='button'
+                                            onClick={handleAdminLogout}
+                                            className='text-white bg-indigo-500 hover:bg-indigo-600 rounded-md px-3 py-2'
+                                        >
+                                            Logout
+                                        </button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <NavLink to='/' className={linkClass}>
+                                            Home
+                                        </NavLink>
+                                        <NavLink to='/jobs' className={linkClass}>
+                                            Jobs
+                                        </NavLink>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>

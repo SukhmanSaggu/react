@@ -1,0 +1,26 @@
+import express from 'express';
+import cors from 'cors';
+import adminRoutes from './routes/adminRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import { connectDB } from './config/db.js';
+
+const app = express();
+const PORT = process.env.PORT || 8000;
+
+app.use(cors());
+app.use(express.json());
+
+app.use('/api/admin', adminRoutes);
+app.use('/api/jobs', userRoutes);
+
+connectDB()
+  .then(() => {
+    console.log('Connected to MySQL database');
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error('Database connection failed:', error);
+    process.exit(1);
+  });

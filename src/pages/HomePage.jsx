@@ -7,12 +7,12 @@ import Homecard from "../components/HomeCards.jsx";
 console.log('hello homepage');
 
 
-const HomePage = () => {
+const HomePage = ({ isAdminSignedIn }) => {
     return (
         <>
 
             <Hero/>
-            <Homecard/>
+            <Homecard isAdminSignedIn={isAdminSignedIn}/>
             <Joblisting/>
             <Viewalljob/>
         </>

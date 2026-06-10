@@ -5,12 +5,14 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "migrate": "node migrate.js"
+    "migrate": "node migrate.js",
+    "build": "echo 'No build step required for backend'"
   },
   "dependencies": {
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "mysql2": "^3.22.3"
+    "mysql2": "^3.22.3",
+    "reactjob-monorepo": "file:.."
   }
 }

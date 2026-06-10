@@ -56,6 +56,9 @@ const Navbar = ({ isAdminSignedIn, adminLogout }) => {
                                         <NavLink to='/jobs' className={linkClass}>
                                             Jobs
                                         </NavLink>
+                                        <NavLink to='/admin-login' className={linkClass}>
+                                            Admin Login
+                                        </NavLink>
                                     </>
                                 )}
                             </div>

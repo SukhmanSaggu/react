@@ -2,7 +2,7 @@ import express from 'express';
 import { getDB } from '../config/db.js';
 
 const router = express.Router();
-const ADMIN_TABLE = 'jobs.admin2';
+const ADMIN_TABLE = 'admin2';
 
 router.post('/login', async (req, res) => {
   try {

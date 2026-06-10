@@ -6,6 +6,7 @@ import {
     RouterProvider,
 } from 'react-router-dom';
 import { useState } from 'react';
+import API_BASE_URL from './config/api';
 import MainLayout from './layouts/MainLayout';
 import HomePage from './pages/HomePage';
 import JobsPage from './pages/JobsPage';
@@ -37,7 +38,7 @@ const App = () => {
 
     // Add New Job
     const addJob = async (newJob) => {
-        await fetch('/api/jobs', {
+        await fetch(`${API_BASE_URL}/api/jobs`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newJob),
@@ -46,14 +47,14 @@ const App = () => {
 
     // Delete Job
     const deleteJob = async (id) => {
-        await fetch(`/api/jobs/${id}`, {
+        await fetch(`${API_BASE_URL}/api/jobs/${id}`, {
             method: 'DELETE',
         });
     };
 
     // Update Job
     const updateJob = async (job) => {
-        await fetch(`/api/jobs/${job.id}`, {
+        await fetch(`${API_BASE_URL}/api/jobs/${job.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

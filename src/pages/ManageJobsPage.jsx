@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Spinner from '../components/Spinner';
+import API_BASE_URL from '../config/api';
 
 const ManageJobsPage = ({ deleteJob }) => {
     const [jobs, setJobs] = useState([]);
@@ -11,7 +12,7 @@ const ManageJobsPage = ({ deleteJob }) => {
     useEffect(() => {
         const fetchJobs = async () => {
             try {
-                const res = await fetch('/api/jobs');
+                const res = await fetch(`${API_BASE_URL}/api/jobs`);
                 if (!res.ok) {
                     throw new Error(`API request failed with status ${res.status}`);
                 }

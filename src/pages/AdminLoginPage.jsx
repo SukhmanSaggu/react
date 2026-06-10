@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import API_BASE_URL from '../config/api';
 
 const AdminLoginPage = ({ adminLogin }) => {
     const [adminId, setAdminId] = useState('');
@@ -13,7 +14,7 @@ const AdminLoginPage = ({ adminLogin }) => {
         setSubmitting(true);
 
         try {
-            const res = await fetch('/api/admin/login', {
+            const res = await fetch(`${API_BASE_URL}/api/admin/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

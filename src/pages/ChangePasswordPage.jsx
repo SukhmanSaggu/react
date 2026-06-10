@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import API_BASE_URL from '../config/api';
 
 const ChangePasswordPage = () => {
     const [currentPassword, setCurrentPassword] = useState('');
@@ -32,7 +33,7 @@ const ChangePasswordPage = () => {
         setSubmitting(true);
 
         try {
-            const res = await fetch('/api/admin/password', {
+            const res = await fetch(`${API_BASE_URL}/api/admin/password`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

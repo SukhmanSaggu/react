@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import API_BASE_URL from '../config/api';
 import JobListing from './JobListing.jsx';
 import Spinner from './Spinner.jsx';
 
@@ -10,7 +11,7 @@ const JobsListing = ({ isHome = false }) => {
     useEffect(() => {
         const fetchJobs = async () => {
             try {
-                const res = await fetch('/api/jobs');
+                const res = await fetch(`${API_BASE_URL}/api/jobs`);
                 if (!res.ok) {
                     throw new Error(`API request failed with status ${res.status}`);
                 }

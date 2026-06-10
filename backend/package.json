@@ -6,7 +6,7 @@
     "start": "node server.js",
     "dev": "node server.js",
     "migrate": "node migrate.js",
-    "build": "echo 'No build step required for backend'"
+    "build": "npm install --prefix ../frontend && npm run build --prefix ../frontend"
   },
   "dependencies": {
     "cors": "^2.8.6",
